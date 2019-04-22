@@ -1,0 +1,41 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <title>Map Generator</title>
+  </head>
+  <body>
+    <canvas id="canvasMap"></canvas>
+    <script src="./random-voronoi.js"></script>
+    <script>
+      const canvasMap = document.getElementById("canvasMap");
+      
+      function drawPoint (x, y, size, canvas) {	
+  	    const context = canvas.getContext("2d");
+  	    context.fillStyle = "#ff2626";
+        context.beginPath();
+        context.arc(x, y, size, 0, Math.PI * 2, true);
+        context.fill();
+      }
+      
+      function setupCanvas (canvas, width, height) {
+        canvas.width = width;
+        canvas.height = height;
+      }
+      
+      function draw (canvas, map) {
+        const nodes = map.nodes;
+        const quantity = Object.keys(nodes).length;
+        for (let i = 0; i < quantity; i++) {
+          const node = nodes[i];
+          drawPoint(node.x, node.y, 2, canvas);
+        }
+      }
+      
+      const map = new Map(100, 100);
+      map.generateNodes();
+      
+      setupCanvas(canvasMap, 100, 100);
+      draw(canvasMap, map);
+    </script>
+  </body>
+</html>
