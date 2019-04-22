@@ -30,7 +30,7 @@ class Map {
       const region = _nodes[node];
       const keys = Object.keys(_nodes);
       for (let i = 0; i < keys.length; i++) {
-        if (i !== node) {
+        if (keys[i] !== node) {
           const point = _nodes[keys[i]];
           const inside = Geometry.circleBounds({x: point.x, y: point.y}, region, radius);
           if (inside) {
