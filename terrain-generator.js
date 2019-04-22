@@ -31,7 +31,7 @@ class Map {
       const keys = Object.keys(_nodes);
       for (let i = 0; i < keys.length; i++) {
         if (i !== node) {
-          const point = _nodes[i];
+          const point = _nodes[keys[i]];
           const inside = Geometry.circleBounds({x: point.x, y: point.y}, region, radius);
           if (inside) {
             delete _nodes[i];
@@ -43,9 +43,9 @@ class Map {
     const refactorKeys = Object.keys(_nodes);
     let counter = 0;
     for (let i = 0; i < refactorKeys; i++) {
-      if (i !== counter) {
-        _nodes[counter] = _nodes[i];
-        delete _nodes[i];
+      if (refactorKeys[i] !== counter) {
+        _nodes[counter] = _nodes[refactorKeys[i]];
+        delete _nodes[refactorKeys[i]];
         counter++;
         continue;
       } else continue;
