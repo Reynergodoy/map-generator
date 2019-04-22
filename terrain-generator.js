@@ -42,7 +42,7 @@ class Map {
     }
     const refactorKeys = Object.keys(_nodes);
     let counter = 0;
-    for (let i = 0; i < refactorKeys; i++) {
+    for (let i = 0; i < refactorKeys.length; i++) {
       if (refactorKeys[i] !== counter) {
         _nodes[counter] = _nodes[refactorKeys[i]];
         delete _nodes[refactorKeys[i]];
