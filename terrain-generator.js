@@ -24,6 +24,33 @@ class Map {
     this.nodesHandler = false;
     return this;
   }
+  deleteNearNodes (radius) {
+    const _nodes = this.nodes;
+    for (const node in _nodes) {
+      const region = _nodes[node];
+      const keys = Object.keys(_nodes);
+      for (let i = 0; i < keys.length; i++) {
+        if (i !== node) {
+          const point = _nodes[i];
+          const inside = Geometry.circleBounds({x: point.x, y: point.y}, region, radius);
+          if (inside) {
+            delete _nodes[i];
+            continue;
+          }
+        } else continue;
+      } 
+    }
+    const refactorKeys = Object.keys(_nodes);
+    let counter = 0;
+    for (let i = 0; i < refactorKeys; i++) {
+      if (i !== counter) {
+        _nodes[counter] = _nodes[i];
+        delete _nodes[i];
+        counter++;
+        continue;
+      } else continue;
+    }
+  }
 }
 
 class Vector {
@@ -40,11 +67,11 @@ class Vector {
  
     if (!vrxs) return false;
  
-	  const rxsr = 1 / vrxs;
-		const t = vPxs * rxsr;
-		const u = vPxr * rxsr;
+    const rxsr = 1 / vrxs;
+    const t = vPxs * rxsr;
+    const u = vPxr * rxsr;
  
-		return (t >= 0) && (t <= 1) && (u >= 0) && (u <= 1);
+    return (t >= 0) && (t <= 1) && (u >= 0) && (u <= 1);
   }
   static vectorProduct (vectorOne, vectorTwo) {
     return vectorOne.x * vectorTwo.y - vectorOne.y * vectorTwo.x;
