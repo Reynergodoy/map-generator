@@ -5,6 +5,7 @@ class Map {
     this.nodesHandler = false;
   }
   generateNodes (proportion) {
+    if (!proportion) proportion = 100;
     if (!this.nodesHandler) {
       const nodes = this.nodes;
       const quantity = this.dimensions.reduce((k, i) => k * i) / proportion;
