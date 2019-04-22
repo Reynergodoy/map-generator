@@ -38,7 +38,7 @@ class Vector {
     
     if (!vPxr) return ((C.x - A.x < 0) != (C.x - B.x < 0)) || ((C.y - A.y < 0) != (C.y - B.y < 0));
  
-		if (!vrxs) return false;
+    if (!vrxs) return false;
  
 	  const rxsr = 1 / vrxs;
 		const t = vPxs * rxsr;
@@ -59,3 +59,10 @@ class Vector {
     return ((pointOne.x === pointTwo.x) && (pointOne.y === pointTwo.y));
   }
 }
+
+class Geometry {
+  static circleBounds (point, origin, radius) {
+    return ((point.x - origin.x)**2 + (point.y - origin.y)**2 <= radius**2);
+  }
+}
+		
